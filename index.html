@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="https://unpkg.com/7.css">
+    <link rel="stylesheet" href="./7.css">
     <style>
         :root {
   font-family: "Comic Sans MS", cursive;
@@ -25,7 +25,7 @@
     input {
         border: black 5px solid;
         padding: 8px;
-        background-image: url(https://media.discordapp.net/attachments/910572127567106089/1113046599506075688/3hzqxmL.png);
+        background-image: url("./search.png");
     background-size: contain;
     transition: transform 250ms;
     }
@@ -57,7 +57,7 @@
         animation: fliegen 250ms alternate infinite;
     }
     body {
-        background-image: url("https://media.discordapp.net/attachments/910572127567106089/1113046601582252082/7n2bC2b.png");
+        background-image: url("./screen.png");
         background-repeat: no-repeat;
         background-size: cover;
         top: 7vw;
@@ -67,7 +67,7 @@
     .div {
         width: 100%;
     height: 100%;
-    background-image: url(https://media.discordapp.net/attachments/910572127567106089/1113047207428501564/photo-1601153211050-ae2e1fa428d7.jpeg?width=742&height=495);
+    background-image: url("./rtx.jpg");
     background-size: contain;
     background-position: center;
     width: 50vw;
@@ -79,7 +79,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        background-image: url('https://media.discordapp.net/attachments/910572127567106089/1113047527479070840/XY0cv18.png?width=1168&height=489');
+        background-image: url("./cars.png");
         background-repeat: no-repeat; 
         background-size: cover; 
     }
@@ -130,25 +130,23 @@
         <input type="text" placeholder="search bar:" id="suche" oninput="filter()">
         
         <ul id="such-element">
-          <li><a href="./bird.html" data-bg="https://cdn.discordapp.com/attachments/910572127567106089/1113057091238760548/xfHXdj2.png">Fappy Bird</a></li>
+          <li><a href="./bird.html" data-bg="./invadar.png">Fappy Bird</a></li>
           <li><a href="https://www.youtube.com/embed/dQw4w9WgXcQ">not rickroll</a></li>
-          <li><a href="./pinball/index.html" data-bg="https://media.discordapp.net/attachments/910572127567106089/1150173886521036870/pinball-game-4617526_1280.jpg?width=935&height=625">Pinball for WIndows: Space Cadet!</a></li>
-          <li><a href="./mc.html" data-bg="https://cdn.discordapp.com/attachments/910572127567106089/1113108376352735372/1C1rsCi.png">minecraft</a></li>
-          <li><a href="./LenniOS%200.9%20Vbox.html"> LEnni OS VM</a></li>
-          <li><a href="./winrg-ruffle.html" data-bg="https://media.discordapp.net/attachments/910572127567106089/1150376002342637618/iu.png?width=1111&height=625">Window Really Good</a></li>
-          <li><a href="./virtualbox.html" data-bg="https://media.discordapp.net/attachments/910572127567106089/1150377458449780807/iu.png">VirtualBox</a></li>
+          <li><a href="./pinball/index.html" data-bg="./pinball.jpg">Pinball for WIndows: Space Cadet!</a></li>
+          <li><a href="./mc.html" data-bg="./minecraft.png">minecraft</a></li>
+          <li><a href="./virtualbox.html" data-bg="./virtualbox.png">VirtualBox</a></li>
         </ul>
     </div>
 
     <article>
     <div class="window active" style="top: calc(50vh - 45vh); left: calc(50% - 30%);">
         <div class="title-bar">
-            <div class="title-bar-text">HQ Gamin'</div>
+            <div class="title-bar-text"><span class="titletext">HQ Gamin'</span></div>
             <div class="title-bar-controls"><button aria-label="Minimize" id="min"></button><button
-                    aria-label="Maximize" id="max"></button><span><button aria-label="Close"></button></span></div>
+                    aria-label="Maximize" id="max"></button><span id="xlose"><button aria-label="Close"></button></span></div>
         </div>
         <div class="window-body has-space" style="height: 80vh;">
-            <iframe src="data:text/html,Welcoem" width="100%" height="100%" allowfullscreen></iframe></div>" frameborder="0"></iframe>
+            <iframe src="data:text/html,<h1>Welcoem too hq gaymes<br><br><h3>wii hop u hev fun with it!!!!</h3><h2> wii recomend PC too pley!!! fon shuld workc (recommended is saffari for androd!!!!!!)" width="100%" height="100%" allowfullscreen></iframe></div>" frameborder="0"></iframe>
             <div class="welcom">
                 <button id="next">ok next</button>
             </div>
@@ -158,6 +156,14 @@
     <!--<article><iframe src="/welcoem.html" width="60%" height="80%"></iframe></div>" frameborder="0"></iframe><span>x</span></article> -->
 
         <script>
+
+            setInterval(() => {
+                try {
+                    document.querySelector(".titletext").textContent = document.querySelector("iframe").contentDocument.title 
+                } catch {
+                    document.querySelector(".titletext").textContent = "HQ gamin'"
+                }
+            }, 1000)
 
             const suchELEment = document.querySelector("#such-element");
             const eingabefeld = document.querySelector("#suche");
@@ -182,7 +188,7 @@
                 document.querySelector("article").style.display = "block"
                 document.querySelector("article").style.backgroundImage = "url('" + (e.target.dataset.bg || "https://media.discordapp.net/attachments/910572127567106089/1113047527479070840/XY0cv18.png?width=1168&height=489") + "')"
             })});
-            document.querySelector("span").addEventListener("click", () => {
+            document.querySelector("span#xlose").addEventListener("click", () => {
                 close()
             })
             function close() { document.querySelector("article").style.display = "none"; document.querySelector(".welcom").style.display = "none" } document.querySelector("#next").addEventListener("click", close)
