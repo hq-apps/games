@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./7.css">
+    <style>
+        :root {
+  font-family: "Comic Sans MS", cursive;
+}
+
+    ::selection {
+        color: green;
+        background-color: red;
+        text-decoration: dotted;
+    }
+    ::-moz-selection {
+        color: white;
+        font-size: 24px;
+        background-color: red;
+    }
+
+    input {
+        border: black 5px solid;
+        padding: 8px;
+        background-image: url("./search.png");
+    background-size: contain;
+    transition: transform 250ms;
+    }
+
+    input:focus-visible {
+        border: black 8px solid;
+        outline: none;
+        transform: rotate(180deg);
+    }
+
+    @keyframes fliegen {
+        from {
+            padding-left: 4px;
+        }
+        to {
+            padding-left: 16px;
+        }
+    }
+    a {
+    color: #ded7af;
+    }
+     h1 {
+    color: #8acfa7;
+    }
+    a:hover::after {
+        content: "<- CLICK ME!!!";
+        color: red;
+        padding-left: 4px;
+        animation: fliegen 250ms alternate infinite;
+    }
+    body {
+        background-image: url("./screen.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        top: 7vw;
+    position: absolute;
+    left: 25vw;
+    }
+    .div {
+        width: 100%;
+    height: 100%;
+    background-image: url("./rtx.jpg");
+    background-size: contain;
+    background-position: center;
+    width: 50vw;
+    height: 25vw;
+    }
+    article {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-image: url("./cars.png");
+        background-repeat: no-repeat; 
+        background-size: cover; 
+    }
+    .span {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 32px;
+        height: 32px;
+        background-color: red;
+        font-size: 24px;
+    }
+    .window {
+        width: 60%;
+    }
+
+    .maximized {
+        width: 100vw;
+        height: 100vh;
+        top: 0 !important;
+        left: 0 !important;
+    }
+
+    .maximized .window-body {
+        height: 90% !important;
+    }
+
+    .minimized {
+        top: calc(100% - 30px) !important;
+        width: 200px !important;
+        height: 30px !important;
+        bottom: 0 !important;
+        left: 0 !important;
+        overflow: hidden;
+    }
+
+    .minimized .window-body {
+        display: none;
+    }
+    </style>
+</head>
+<body>
+    <div class="div">
+    <h1>
+        HQ gamyes
+        </h1>
+        
+        <input type="text" placeholder="search bar:" id="suche" oninput="filter()">
+        
+        <ul id="such-element">
+          <li><a href="./bird.html" data-bg="./invadar.png">Fappy Bird</a></li>
+          <li><a href="https://www.youtube.com/embed/dQw4w9WgXcQ">not rickroll</a></li>
+          <li><a href="https://x8bitrain.github.io/webXash/" data-bg="./halflife.jpg" data-showopen="true">Half Life</a></li>
+          <li><a href="./pinball/index.html" data-bg="./pinball.jpg">Pinball for windwos: Space Cadet!</a></li>
+          <li><a href="./vm.html" data-bg="./virtuelcube.png">VirtuelCube</a></li>
+        </ul>
+    </div>
+
+    <article>
+    <div class="window active" style="top: calc(50vh - 45vh); left: calc(50% - 30%);">
+        <div class="title-bar">
+            <div class="title-bar-text"><span class="titletext">HQ Gamin'</span></div>
+            <div class="title-bar-controls"><a id="openwindow" target="_blank" href="#" style="display: none;" data-skipwindow="true"><button >Open in new tab</button></a><button aria-label="Minimize" id="min"></button><button
+                    aria-label="Maximize" id="max"></button><span id="xlose"><button aria-label="Close"></button></span></div>
+        </div>
+        <div class="window-body has-space" style="height: 80vh;">
+            <iframe src="data:text/html,<h1>Welcoem too hq gaymes<br><br><h3>wii hop u hev fun with it!!!!</h3><h2> wii recomend PC too pley!!! fon shuld workc (recommended is saffari for androd!!!!!!)" width="100%" height="100%" allowfullscreen></iframe></div>" frameborder="0"></iframe>
+            <div class="welcom">
+                <button id="next">ok next</button>
+            </div>
+        </div>
+    </div>
+</article>
+    <!--<article><iframe src="/welcoem.html" width="60%" height="80%"></iframe></div>" frameborder="0"></iframe><span>x</span></article> -->
+
+        <script>
+
+            setInterval(() => {
+                try {
+                    document.querySelector(".titletext").textContent = document.querySelector("iframe").contentDocument.title 
+                } catch {
+                    document.querySelector(".titletext").textContent = "HQ gamin'"
+                }
+            }, 1000)
+
+            const suchELEment = document.querySelector("#such-element");
+            const eingabefeld = document.querySelector("#suche");
+
+            function filter() {
+                suchELEment.childNodes.forEach(element => {
+                    try {
+                        if(element.textContent.match(eingabefeld.value)) {
+                            element.style.display = "";
+                        } else {
+                            element.style.display = "none";
+                        }
+                    } catch {
+                    }
+                });
+            }
+
+            document.querySelectorAll("a").forEach(element => { if (element.dataset.skipwindow) return; element.addEventListener("click", e => {
+                e.preventDefault();
+                console.log(e)
+                document.querySelector("iframe").src = e.target.href
+                document.querySelector("article").style.display = "block"
+                document.querySelector("article").style.backgroundImage = "url('" + (e.target.dataset.bg || "https://media.discordapp.net/attachments/910572127567106089/1113047527479070840/XY0cv18.png?width=1168&height=489") + "')"
+                document.querySelector("#openwindow").href = e.target.href
+                if(e.target.dataset.showopen) document.querySelector("#openwindow").style.display = "block"
+                else document.querySelector("#openwindow").style.display = "none"
+            })});
+            document.querySelector("span#xlose").addEventListener("click", () => {
+                close()
+            })
+            function close() { document.querySelector("article").style.display = "none"; document.querySelector(".welcom").style.display = "none" } document.querySelector("#next").addEventListener("click", close)
+
+            const dlwin = document.querySelector(".window")
+const dltitle = document.querySelector(".title-bar")
+
+function max() {
+	dlwin.classList.toggle("maximized")
+	if(dlwin.classList.contains("maximized")) {
+		stopDragElement(dlwin)
+		document.body.style.overflow = "hidden"
+	} else {
+		dragElement(dlwin)
+		document.body.style.overflow = "unset"
+	}
+}
+
+function min() {
+    dlwin.classList.toggle("minimized")
+	if(dlwin.classList.contains("minimized")) {
+		stopDragElement(dlwin)
+		document.body.style.overflow = "hidden"
+	} else {
+		dragElement(dlwin)
+		document.body.style.overflow = "unset"
+	}
+}
+
+dragElement(dlwin);
+
+function stopDragElement(elmnt) {
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = null;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = null;
+  }
+}
+
+function dragElement(elmnt) {
+  var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+  if (document.getElementById(elmnt.id + "header")) {
+    // if present, the header is where you move the DIV from:
+    document.getElementById(elmnt.id + "header").onmousedown = dragMouseDown;
+  } else {
+    // otherwise, move the DIV from anywhere inside the DIV:
+    elmnt.onmousedown = dragMouseDown;
+  }
+
+  function dragMouseDown(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // get the mouse cursor position at startup:
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    document.onmouseup = closeDragElement;
+    // call a function whenever the cursor moves:
+    document.onmousemove = elementDrag;
+  }
+
+  function elementDrag(e) {
+    e = e || window.event;
+    e.preventDefault();
+    // calculate the new cursor position:
+    pos1 = pos3 - e.clientX;
+    pos2 = pos4 - e.clientY;
+    pos3 = e.clientX;
+    pos4 = e.clientY;
+    // set the element's new position:
+    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+  }
+
+  function closeDragElement() {
+    // stop moving when mouse button is released:
+    document.onmouseup = null;
+    document.onmousemove = null;
+  }
+}
+
+document.getElementById("max").addEventListener("click", max)
+document.getElementById("min").addEventListener("click", min)
+        </script>
+</body>
+</html>
